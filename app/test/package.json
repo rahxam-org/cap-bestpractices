@@ -1,0 +1,56 @@
+{
+  "name": "bestpractices-ui-test",
+  "description": "bestpractices-ui-test",
+  "private": true,
+  "devDependencies": {
+    "@wdio/allure-reporter": "~7.0.3",
+    "@wdio/cli": "~7.0.3",
+    "@wdio/devtools-service": "^7.0.3",
+    "@wdio/junit-reporter": "~7.0.3",
+    "@wdio/local-runner": "~7.0.3",
+    "@wdio/mocha-framework": "~7.0.3",
+    "@wdio/spec-reporter": "~7.0.3",
+    "@wdio/sync": "~7.0.3",
+    "allure-commandline": "~2.13.8",
+    "axios": "^0.21.1",
+    "chromedriver": "~88.0.0",
+    "deepmerge": "~4.2.2",
+    "eslint": "~7.20.0",
+    "start-server-and-test": "~1.12.0",
+    "wdio-chromedriver-service": "~6.0.4",
+    "wdio-coverage-service": "0.0.1",
+    "nyc": "~15.1.0"
+  },
+  "dependencies": {},
+  "scripts": {
+    "start-server": "cd ../../ && npm run start:sqlite",
+    "test:dev:all": "npx wdio run ./wdio.conf.local.js ",
+    "test:dev": "npx wdio run ./wdio.conf.local.js --mochaOpts.grep \"#dev\" ",
+    "test:dev:headless": "cd ../ && npm run build-instrument && cd test && npx wdio run ./wdio.conf.ci.js --mochaOpts.grep \"#dev\" ",
+    "test:headless": "npx wdio run ./wdio.conf.ci.js",
+    "test:ci": "cd ../ && npm run build-instrument && cd test && npx start-server-and-test start-server http://localhost:4004/ test:headless",
+    "report": "npx nyc report && npx allure generate --clean",
+    "report:open": "npx allure open"
+  },
+  "standard": {
+    "globals": [
+      "browser"
+    ]
+  },
+  "nyc": {
+    "temp-dir": "./test/.nyc_output",
+    "cwd": "./../",
+    "all": true,
+    "check-coverage": false,
+    "exclude": [],
+    "extension": [
+      "*.js"
+    ],
+    "reporter": [
+      "json",
+      "text",
+      "lcov",
+      "cobertura"
+    ]
+  }
+}
