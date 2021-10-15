@@ -1,0 +1,39 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "authenticationMethod": "route",
+  "sessionTimeout": 60,
+  "logout": {
+    "logoutEndpoint": "/do/logout",
+    "logoutPage": "/webapp/logout.html"
+  },
+  "routes": [
+    {
+      "source": "^/webapp(.*)$",
+      "target": "$1",
+      "localDir": "dist/"
+    },
+    {
+      "source": "^/dev(.*)$",
+      "target": "$1",
+      "localDir": "webapp/"
+    },
+    {
+      "source": "^/basic-auth/webapp(.*)$",
+      "target": "$1",
+      "localDir": "webapp/",
+      "authenticationType": "basic"
+    },
+    {
+      "source": "^/basic-auth/(.*)",
+      "destination": "bestpractices-srv-binding",
+      "csrfProtection": false,
+      "target": "$1",
+      "authenticationType": "basic"
+    },
+    {
+      "source": "^/(.*)",
+      "csrfProtection": false,
+      "destination": "bestpractices-srv-binding"
+    }
+  ]
+}

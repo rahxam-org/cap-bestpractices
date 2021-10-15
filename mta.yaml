@@ -1,0 +1,97 @@
+_schema-version: "3.1"
+ID: bestpractices
+version: 0.1.0
+description: bestpractices Application
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build\/all
+modules:
+  - name: bestpractices-ui
+    type: html5
+    path: app
+    parameters:
+      memory: 128M
+      disk-quota: 1024M
+      routes:
+        - route: ${default-uri}
+        - route: ${MTA_ENV}.${default-domain}
+    build-parameters:
+      supported-platforms:
+        - CF
+      builder: custom
+      ignore:
+        - test/
+      commands:
+        - npm i
+        - npm run-script build
+        - npm prune --production
+    requires:
+      - name: bestpractices-uaa
+      - name: bestpractices-logs
+      - name: bestpractices-srv-binding
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          timeout: 120000
+          strictSSL: true
+          name: bestpractices-srv-binding
+          url: ~{srv-url}
+    properties:
+      COOKIES: |
+        { "SameSite":"None" }
+      SEND_XFRAMEOPTIONS: false
+      SESSION_TIMEOUT: 120
+      SAP_JWT_TRUST_ACL:
+        - clientid: "*"
+          identityzone: "*"
+  - name: bestpractices-srv
+    type: nodejs
+    path: gen/srv
+    properties:
+      EXIT: 1
+      SAP_JWT_TRUST_ACL:
+        - clientid: "*"
+          identityzone: "*"
+    parameters:
+      memory: 256M
+      disk-quota: 4096M
+      routes:
+        - route: ${default-uri}
+        - route: ${MTA_ENV}-srv.${default-domain}
+    requires:
+      - name: bestpractices-db
+      - name: bestpractices-logs
+      - name: bestpractices-uaa
+    provides:
+      - name: bestpractices-srv-binding
+        properties:
+          srv-url: ${default-url}
+  - name: db
+    type: hdb
+    path: gen/db
+    parameters:
+      app-name: bestpractices-db
+    requires:
+      - name: bestpractices-db
+resources:
+  - name: bestpractices-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: ${service-name}
+  - name: bestpractices-uaa
+    parameters:
+      path: xs-security.json
+      service-plan: application
+    type: com.sap.xs.uaa
+  - name: bestpractices-logs
+    parameters:
+      service-plan: lite
+      service: application-logs
+    type: org.cloudfoundry.managed-service
