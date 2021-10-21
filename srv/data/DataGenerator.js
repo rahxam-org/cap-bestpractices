@@ -1,7 +1,7 @@
 // node
 const path = require('path')
 const { v4: uuidv4 } = require('uuid')
-const util = require('./dataGeneratorUtil')
+const util = require('./data-generator-util')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter
 
 const APPLICATION_DATA = []
@@ -12,7 +12,6 @@ module.exports = class {
         this.data = importData
 
         this.insertUuidv4Ids()
-        this.parseProjects()
         this.transferText()
         this.uniquifyById()
       }, error => console.log(error))

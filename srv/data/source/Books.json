@@ -1,9 +1,11 @@
 {
     "values": [
         {
+            "ID": "604a1713-eb2d-4c29-bf6b-9325fa98003b",
             "name": "Good Book"
         },
         {
+            "ID": "c0b02087-a575-4e1a-bba7-f339b21d26b7",
             "name": "Bad Book"
         }
     ]

@@ -1,7 +1,7 @@
 module.exports.const = {}
 
 module.exports.reject = function (req) {
-  req.reject()
+  req.reject(500)
 }
 
 module.exports.addFilterToQuery = function (query, filterArray) {

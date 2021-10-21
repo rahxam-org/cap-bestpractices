@@ -1,0 +1,3 @@
+service EchtEventService {
+  event fancyEvent {};
+}

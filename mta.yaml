@@ -65,6 +65,7 @@ modules:
     requires:
       - name: bestpractices-db
       - name: bestpractices-logs
+      - name: bestpractices-dest
       - name: bestpractices-uaa
     provides:
       - name: bestpractices-srv-binding
@@ -94,4 +95,9 @@ resources:
     parameters:
       service-plan: lite
       service: application-logs
+    type: org.cloudfoundry.managed-service
+  - name: bestpractices-dest
+    parameters:
+      service-plan: lite
+      service: destination
     type: org.cloudfoundry.managed-service

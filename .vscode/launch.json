@@ -5,6 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "import",
+      "command": "cds import .\\mockserver\\API_AUTHORS.edmx --keep-namespace  --as cds",
+      "type": "node-terminal",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**",
+        "**/node_modules/**",
+        "**/cds/lib/lazy.js",
+        "**/cds/lib/req/cls.js",
+        "**/odata-v4/okra/**"
+      ]
+    },
+    {
       "name": "bookshop",
       "command": "npx cds watch bookshop",
       "type": "node-terminal",

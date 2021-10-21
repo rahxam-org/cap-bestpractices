@@ -6,8 +6,8 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "5.4.3",
-    "@sap/cds-dk": "4.4.1",
+    "@sap/cds": "5.5.4",
+    "@sap/cds-dk": "4.5.4",
     "express": "^4"
   },
   "devDependencies": {
