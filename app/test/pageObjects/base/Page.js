@@ -44,28 +44,6 @@ module.exports = class {
     return this._i18n[key]
   }
 
-  fill ({ i18nLabel, idLabel, value, waitForSuggestion, parent }) {
-    const _parent = parent || this.view
-    const workPackage = this.inputForLabel({ parent: _parent, i18n: i18nLabel })
-    if (idLabel) { workPackage.setValue(`${idLabel.label} (${idLabel.id})`) }
-    if (value) { workPackage.setValue(value) }
-
-    // ui5 bug pressing enter before suggestion is loaded is skipping the tokenization
-    if (waitForSuggestion) {
-      $('.sapMSuggestionsPopover').waitForExist()
-    }
-
-    workPackage.keys('Enter')
-    workPackage.keys('Tab')
-  }
-
-  clear ({ i18nLabel }) {
-    const workPackage = this.inputForLabel({ i18n: i18nLabel })
-    // clear up to 7 tokens and/or all text
-    workPackage.setValue('')
-    workPackage.keys(['Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace', 'Backspace', 'Control', 'a', 'Control', 'Delete'])
-  }
-
   /**
      * @param {any} param parameter
      * @param {string} param.i18n can be label or tooltip, use tooltip in case of icon
