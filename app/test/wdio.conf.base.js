@@ -117,7 +117,7 @@ exports.config = {
       coverageReporter: {
         enable: false,
         type: 'html',
-        logDir: path.joing(__dirname, '/coverage')
+        logDir: path.join(__dirname, '/coverage')
       }
     }],
     'chromedriver'
