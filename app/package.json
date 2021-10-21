@@ -4,13 +4,13 @@
   "license": "SEE LICENSE IN <filename>",
   "private": true,
   "devDependencies": {
-    "@ui5/cli": "~2.12.1",
+    "@ui5/cli": "~2.14.0",
     "ui5-middleware-simpleproxy": "~0.7.3",
     "ui5-tooling-livereload": "~0.1.6",
     "nyc": "~15.1.0"
   },
   "dependencies": {
-    "@sap/approuter": "~10.7.1"
+    "@sap/approuter": "~10.8.2"
   },
   "scripts": {
     "watch": "npx ui5 serve -p 8080 -o index.html",

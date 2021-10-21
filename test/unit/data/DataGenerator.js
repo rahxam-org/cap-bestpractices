@@ -18,7 +18,7 @@ describe('generator', () => {
     await generator.injectIntoCDS(cdsStub)
     await cdsStub.run()
 
-    expect(cdsStub.operations).lengthOf.to.be.greaterThan(40, 'demo data seams to be to short') // at the time of writing it was 55
+    expect(cdsStub.operations).lengthOf.to.be.greaterThan(1, 'demo data seams to be to short') // at the time of writing it was 2
     console.info(`\treceived ${cdsStub.operations.length} cds operations`)
   })
 

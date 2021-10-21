@@ -10,7 +10,7 @@ function JunitSpecReporter (runner, options) {
   this._specReporter = new Spec(runner, options)
   return this
 }
-JunitSpecReporter.prototype.__proto__ = Base.prototype
+JunitSpecReporter.prototype = Base.prototype
 
 module.exports = JunitSpecReporter
 /* c8 ignore stop */
