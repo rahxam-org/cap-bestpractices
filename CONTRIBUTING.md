@@ -313,3 +313,5 @@ pip install pre-commit
 curl <https://pre-commit.com/install-local.py> | python -
 
 run `pre-commit install`
+
+cf install-plugin multiapps

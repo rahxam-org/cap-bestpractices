@@ -5,7 +5,11 @@ const cookieParser = require('cookie-parser')
 // handle bootstrapping events...
 cds.on('bootstrap', (app) => {
   // Improve App Security
-  app.use(helmet())
+  const helmetConf = {}
+  if (app.settings.env === 'test') {
+    helmetConf.contentSecurityPolicy = false
+  }
+  app.use(helmet(helmetConf))
   app.use(cookieParser())
   // If you do not use an approuter register csurf to handle CSRF protection
 

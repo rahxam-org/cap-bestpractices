@@ -1,0 +1,86 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CI
+
+on:
+  push:
+    branches-ignore: ['main']
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/app/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Branch name as environment Variable
+        run: echo "BRANCH=${GITHUB_REF##*/}"  >> $GITHUB_ENV
+
+      - name: Install srv
+        run: npm ci
+      - name: Install app
+        run: |
+          cd app
+          npm ci
+      - name: Install app tests
+        run: |
+          cd app/test
+          npm ci
+      - name: Install mockserver
+        run: |
+          cd mockserver
+          npm ci
+
+  test:
+    runs-on: ubuntu-latest
+    needs: setup
+
+    steps:
+      - name: create default-env.json
+        run: |
+          ls
+          mv default-env.json.bak default-env.json
+      - name: srv API tests
+        run: npm test:with-mockserver
+      - uses: oke-py/npm-audit-action@v1.8.2
+        name: backend audit
+        with:
+          audit_level: moderate
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_labels: vulnerability
+          dedupe_issues: true
+          create_issues: false
+          production_flag: true
+
+      - uses: oke-py/npm-audit-action@v1.8.2
+        name: app audit
+        with:
+          audit_level: moderate
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_labels: vulnerability
+          dedupe_issues: true
+          create_issues: false
+          production_flag: true
+          working_directory: app
+
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: logs
