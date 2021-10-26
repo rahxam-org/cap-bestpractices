@@ -150,7 +150,7 @@ jobs:
           git config user.name "GitHub Actions Version Bot"
           git config user.email "<>"
       - name: Bump version
-        uses: qzb/standard-version-action@v1
+        uses: qzb/standard-version-action@v1.0.1
 
       # Replaced by dependabot
       # - uses: oke-py/npm-audit-action@v1.8.2
