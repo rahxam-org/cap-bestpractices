@@ -59,26 +59,27 @@ jobs:
           mv default-env.json.bak default-env.json
       - name: srv API tests
         run: npm test:with-mockserver
-      - uses: oke-py/npm-audit-action@v1.8.2
-        name: backend audit
-        with:
-          audit_level: moderate
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          issue_labels: vulnerability
-          dedupe_issues: true
-          create_issues: false
-          production_flag: true
+      # Replaced by dependabot
+      # - uses: oke-py/npm-audit-action@v1.8.2
+      #   name: backend audit
+      #   with:
+      #     audit_level: moderate
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     issue_labels: vulnerability
+      #     dedupe_issues: true
+      #     create_issues: false
+      #     production_flag: true
 
-      - uses: oke-py/npm-audit-action@v1.8.2
-        name: app audit
-        with:
-          audit_level: moderate
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          issue_labels: vulnerability
-          dedupe_issues: true
-          create_issues: false
-          production_flag: true
-          working_directory: app
+      # - uses: oke-py/npm-audit-action@v1.8.2
+      #   name: app audit
+      #   with:
+      #     audit_level: moderate
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     issue_labels: vulnerability
+      #     dedupe_issues: true
+      #     create_issues: false
+      #     production_flag: true
+      #     working_directory: app
 
       - uses: actions/upload-artifact@v1
         if: failure()
