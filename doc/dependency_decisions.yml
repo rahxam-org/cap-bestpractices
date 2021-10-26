@@ -1,0 +1,193 @@
+---
+- - :permit
+  - MIT
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:48:53.862572074 Z
+- - :permit
+  - Apache 2.0
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:53.743352844 Z
+- - :permit
+  - ISC
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:54.131365230 Z
+- - :permit
+  - new BSD
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:54.528607232 Z
+- - :permit
+  - BSD
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:54.916196513 Z
+- - :permit
+  - Simplified BSD
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:55.321726419 Z
+- - :permit
+  - CC-BY-4.0
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:55.750620404 Z
+- - :permit
+  - BSD-like
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:56.142177620 Z
+- - :permit
+  - "(MIT AND Zlib)"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:56.526897049 Z
+- - :permit
+  - MIT/X11
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:56.916782944 Z
+- - :permit
+  - THE DERIVED BEER-WARE LICENSE
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:49:57.327487900 Z
+- - :permit
+  - BSD Zero Clause License
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:50:01.028364859 Z
+- - :approve
+  - "@sap/approuter"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:03.290717511 Z
+- - :approve
+  - "@sap/audit-logging"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:03.815930755 Z
+- - :approve
+  - "@sap/e2e-trace"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:04.332755488 Z
+- - :approve
+  - "@sap/logging"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:04.717971081 Z
+- - :approve
+  - "@sap/xsenv"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:05.123254939 Z
+- - :approve
+  - "@sap/xssec"
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:05.549900279 Z
+- - :approve
+  - domutils
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:05.932698340 Z
+- - :approve
+  - fsevents
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:06.334571453 Z
+- - :approve
+  - markdown-it-anchor
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:06.798451286 Z
+- - :approve
+  - spdx-exceptions
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:07.205146563 Z
+- - :approve
+  - spdx-license-ids
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:07.635182484 Z
+- - :approve
+  - taffydb
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:08.046849675 Z
+- - :approve
+  - tv4
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:08.431805836 Z
+- - :approve
+  - tweetnacl
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:08.808199991 Z
+- - :approve
+  - callsite
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:09.232799943 Z
+- - :approve
+  - component-bind
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:09.618300310 Z
+- - :approve
+  - component-inherit
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:10.045657896 Z
+- - :approve
+  - indexof
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:10.423173264 Z
+- - :approve
+  - object-component
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:10.812298977 Z
+- - :approve
+  - stream-buffers
+  - :who:
+    :why:
+    :versions: []
+    :when: 2021-10-26 19:51:11.211001208 Z

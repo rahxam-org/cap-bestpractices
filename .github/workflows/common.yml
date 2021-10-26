@@ -53,12 +53,105 @@ jobs:
     needs: setup
 
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
       - name: create default-env.json
         run: |
           ls
           mv default-env.json.bak default-env.json
+
+      - name: Install srv
+        run: npm ci
+      - name: Install app
+        run: |
+          cd app
+          npm ci
+      - name: Install app tests
+        run: |
+          cd app/test
+          npm ci
+      - name: Install mockserver
+        run: |
+          cd mockserver
+          npm ci
+
       - name: srv API tests
-        run: npm test:with-mockserver
+        run: npm run test:with-mockserver
+
+      - name: UI tests
+        run: |
+          cd app/test
+          npm run test:ci
+
+      - uses: 5monkeys/cobertura-action@master
+        name: srv coverage
+        with:
+          path: coverage/cobertura-coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+      - name: Publish Test Report srv
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: 'junit.xml'
+
+      - uses: 5monkeys/cobertura-action@master
+        name: App coverage
+        with:
+          path: app/coverage/cobertura-coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+      - name: Publish Test Report app
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: 'app/test/reports/junit/*.xml'
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: reports
+          path: |
+            reports/
+            junit.xml
+            coverage/cobertura-coverage.xml
+            app/coverage/cobertura-coverage.xml
+            app/coverage/lcov-report/
+            app/test/reports/
+            app/test/allure-report/
+
+      - name: nodejsscan scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: '. --sarif --output results.sarif || true'
+      - name: Upload njsscan report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif
+      - name: Check for secrets
+        uses: zricethezav/gitleaks-action@master
+      - name: Perform license checks
+        id: license-check
+        uses: ralexander-phi/license_approval@master
+        with:
+          package_manager: 'npm'
+
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://www.zaproxy.org/'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a -J gl-dast-report.json'
+      - name: Configure committer
+        run: |
+          git config user.name "GitHub Actions Version Bot"
+          git config user.email "<>"
+      - name: Bump version
+        uses: qzb/standard-version@v1
+
       # Replaced by dependabot
       # - uses: oke-py/npm-audit-action@v1.8.2
       #   name: backend audit

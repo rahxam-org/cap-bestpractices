@@ -16,7 +16,8 @@ RUN sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | s
 RUN sudo bash -c "echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google-chrome.list"
 # ...then, update your local package index
 RUN sudo apt-get -y update
-RUN sudo apt-get install  -y install google-chrome-stable cf8-cli
+RUN sudo apt-get install  -y install google-chrome-stable cf8-cli ruby-full
+RUN sudo gem install license_finder
 RUN cf install-plugin Targets -r CF-Community -f
 RUN cf install-plugin multiapps -r CF-Community -f
 
