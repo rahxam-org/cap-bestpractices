@@ -107,8 +107,17 @@ jobs:
         if: always() # always run even if the previous step fails
         with:
           report_paths: 'app/test/reports/junit/*.xml'
+
+      - name: nodejsscan scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: '. --html --output njsscan.html || true'
+      - name: Check for secrets
+        uses: zricethezav/gitleaks-action@master
+        
       - uses: actions/upload-artifact@v2
-        if: failure()
+        if: always()
         with:
           name: reports
           path: |
@@ -119,18 +128,8 @@ jobs:
             app/coverage/lcov-report/
             app/test/reports/
             app/test/allure-report/
-
-      - name: nodejsscan scan
-        id: njsscan
-        uses: ajinabraham/njsscan-action@master
-        with:
-          args: '. --sarif --output results.sarif || true'
-      - name: Upload njsscan report
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif
-      - name: Check for secrets
-        uses: zricethezav/gitleaks-action@master
+            njsscan.sarif
+            
       - name: Perform license checks
         id: license-check
         uses: ralexander-phi/license_approval@master
@@ -145,6 +144,13 @@ jobs:
           target: 'https://www.zaproxy.org/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a -J gl-dast-report.json'
+          
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: reports
+          path: |
+            gl-dast-report.json
       - name: Configure committer
         run: |
           git config user.name "GitHub Actions Version Bot"
@@ -174,7 +180,7 @@ jobs:
       #     production_flag: true
       #     working_directory: app
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         if: failure()
         with:
           name: logs
