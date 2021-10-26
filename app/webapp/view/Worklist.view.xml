@@ -2,17 +2,16 @@
 	controllerName="quadrio.cap.bestpractices.bestpractices-ui.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
-
+	xmlns:semantic="sap.f.semantic"
+>
 	<semantic:SemanticPage
 		id="page"
 		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
-
+		toggleHeaderOnTitleClick="false"
+	>
 		<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}" />
+			<Title text="{i18n>worklistTitle}"/>
 		</semantic:titleHeading>
-
 		<semantic:content>
 			<Table
 				id="table"
@@ -27,45 +26,48 @@
 				noDataText="{worklistView>/tableNoDataText}"
 				growing="true"
 				growingScrollToLoad="true"
-				updateFinished=".onUpdateFinished">
-
+				updateFinished=".onUpdateFinished"
+			>
 				<headerToolbar>
 					<Toolbar>
-						<Title id="tableHeader" text="{worklistView>/worklistTableTitle}"/>
-						<ToolbarSpacer />
+						<Title
+							id="tableHeader"
+							text="{worklistView>/worklistTableTitle}"
+						/>
+						<ToolbarSpacer/>
 						<SearchField
 							id="searchField"
 							tooltip="{i18n>worklistSearchTooltip}"
 							search=".onSearch"
-							width="auto">
-						</SearchField>
+							width="auto"
+						/>
 					</Toolbar>
 				</headerToolbar>
-
 				<columns>
 					<Column id="nameColumn">
-						<Text text="{i18n>tableNameColumnTitle}" id="nameColumnTitle"/>
+						<Text
+							text="{i18n>tableNameColumnTitle}"
+							id="nameColumnTitle"
+						/>
 					</Column>
 				</columns>
-
 				<items>
 					<ColumnListItem
 						type="Navigation"
-						press=".onPress">
+						press=".onPress"
+					>
 						<cells>
-							<ObjectIdentifier
-								title="{name}"/>
+							<ObjectIdentifier title="{name}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
 			</Table>
 		</semantic:content>
-
 		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+			<semantic:SendEmailAction
+				id="shareEmail"
+				press=".onShareEmailPress"
+			/>
 		</semantic:sendEmailAction>
-
-
 	</semantic:SemanticPage>
-
 </mvc:View>

@@ -1,8 +1,6 @@
 {
   "files.exclude": {
     ".reuse/**": true,
-    "**/.gitignore": true,
-    "**/.vscode": true,
     "LICENSES/**": true
   },
   "debug.javascript.terminalOptions": {
@@ -13,5 +11,18 @@
       "**/cds/lib/req/cls.js",
       "**/odata-v4/okra/**"
     ]
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "numso.prettier-standard-vscode",
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "files.autoSave": "afterDelay",
+  "standard.autoFixOnSave": true,
+  "[cds]": {
+    "editor.defaultFormatter": "SAPSE.vscode-cds"
   }
 }

@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="2.3830" tests="7" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-10-21T08:12:58" tests="0" time="0.0000" failures="0">
+<testsuites name="Mocha Tests" time="6.8710" tests="7" failures="1">
+  <testsuite name="Root Suite" timestamp="2021-10-26T13:54:54" tests="0" time="0.0000" failures="0">
   </testsuite>
-  <testsuite name="generator" timestamp="2021-10-21T08:13:00" tests="3" file="D:\cap\cap-bestpractices\test\unit\data\DataGenerator.js" time="0.0150" failures="0">
-    <testcase name="generator should startup" time="0.0030" classname="should startup">
+  <testsuite name="generator" timestamp="2021-10-26T13:54:59" tests="3" file="/workspaces/cap-bestpractices/test/unit/data/DataGenerator.js" time="0.0160" failures="0">
+    <testcase name="generator should startup" time="0.0020" classname="should startup">
     </testcase>
-    <testcase name="generator mock injectIntoCDS" time="0.0010" classname="mock injectIntoCDS">
+    <testcase name="generator mock injectIntoCDS" time="0.0020" classname="mock injectIntoCDS">
     </testcase>
-    <testcase name="generator write CSV" time="0.0060" classname="write CSV">
+    <testcase name="generator write CSV" time="0.0080" classname="write CSV">
     </testcase>
   </testsuite>
-  <testsuite name="books-ui" timestamp="2021-10-21T08:13:00" tests="4" file="D:\cap\cap-bestpractices\test\integration\book-ui.js" time="0.7670" failures="0">
-    <testcase name="books-ui Books read set" time="0.0230" classname="Books read set">
+  <testsuite name="books-ui" timestamp="2021-10-26T13:54:59" tests="4" file="/workspaces/cap-bestpractices/test/integration/book-ui.js" time="2.3660" failures="1">
+    <testcase name="books-ui Books read set" time="0.0260" classname="Books read set">
     </testcase>
-    <testcase name="books-ui should not allow to delete Books" time="0.0370" classname="should not allow to delete Books">
+    <testcase name="books-ui should not allow to delete Books" time="0.0400" classname="should not allow to delete Books">
     </testcase>
-    <testcase name="books-ui create a new Book" time="0.0310" classname="create a new Book">
+    <testcase name="books-ui create a new Book" time="0.0440" classname="create a new Book">
     </testcase>
-    <testcase name="books-ui should request Authors" time="0.5810" classname="should request Authors">
+    <testcase name="books-ui should request Authors" time="2.1280" classname="should request Authors">
+      <failure message="expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 502" type="AssertionError"><![CDATA[AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 200 but got 502
+    at Context.<anonymous> (/workspaces/cap-bestpractices/test/integration/book-ui.js:37:25)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)]]></failure>
     </testcase>
   </testsuite>
 </testsuites>

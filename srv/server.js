@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 cds.on('bootstrap', (app) => {
   // Improve App Security
   const helmetConf = {}
-  if (app.settings.env === 'test') {
+  if (app.settings.env !== 'production') {
     helmetConf.contentSecurityPolicy = false
   }
   app.use(helmet(helmetConf))

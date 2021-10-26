@@ -89,7 +89,6 @@
     "deploy-cf:bg-no-confirm": "cf bg-deploy mta_archives/$(ls -t -U mta_archives/ | grep -m 1 '.*\\.mtar') -f --no-confirm -e mta.mtaext",
     "deploy:confirm-bg-deploy": "cf bg-deploy -i $(cat deployment.uuid) -a resume"
   },
-
   "prettier": "prettier-config-standard",
   "jest": {
     "testEnvironment": "node",
