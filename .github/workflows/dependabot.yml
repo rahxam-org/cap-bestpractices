@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # Enable version updates for npm root service
+  - package-ecosystem: 'npm'
+    # Look for `package.json` and `lock` files in the `root` directory
+    directory: '/'
+    # Check the npm registry for updates every day (weekdays)
+    schedule:
+      interval: 'daily'
+    allow:
+      - dependency-name: '*'
+        dependency-type: 'production'
+
+  # Enable version updates for npm app folder
+  - package-ecosystem: 'npm'
+    # Look for `package.json` and `lock` files in the `app` directory
+    directory: '/app/'
+    # Check the npm registry for updates every day (weekdays)
+    schedule:
+      interval: 'daily'
+    allow:
+      - dependency-name: '*'
+        dependency-type: 'production'
