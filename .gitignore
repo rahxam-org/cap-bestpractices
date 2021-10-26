@@ -64,3 +64,4 @@ logs
 npm-debug.log*
 
 test-results.xml
+gl-license-scan.json
