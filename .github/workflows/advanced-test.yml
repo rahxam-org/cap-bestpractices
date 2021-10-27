@@ -8,6 +8,15 @@ on:
     branches-ignore: ['mainxx']
 
 jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan CourseTable with Zed Attack Proxy
+    steps:
+      - name: ZAP main site
+        uses: zaproxy/action-full-scan@v0.2.0
+        with:
+          target: 'https://www.coursetable.com'
+
   test:
     runs-on: ubuntu-latest
 
@@ -103,7 +112,7 @@ jobs:
         uses: zaproxy/action-full-scan@v0.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-bare'
+          docker_name: 'owasp/zap2docker-stable'
           target: 'https://sc-schwielochsee.de/'
           # cmd_options: '-a -J gl-dast-report.json'
 
