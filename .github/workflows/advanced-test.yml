@@ -48,6 +48,40 @@ jobs:
           cd ../../mockserver
           npm i
 
+      - name: srv API tests
+        run: npm run test:with-mockserver
+
+      - name: UI tests
+        run: |
+          cd app/test
+          npm run test:ci
+
+      - uses: 5monkeys/cobertura-action@master
+        name: srv coverage
+        with:
+          path: coverage/cobertura-coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+
+      - name: Publish Test Report srv
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: 'test-results.xml'
+
+      - uses: 5monkeys/cobertura-action@master
+        name: App coverage
+        with:
+          path: app/coverage/cobertura-coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+
+      - name: Publish Test Report app
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: 'app/test/reports/junit/*.xml'
+
       # - name: Static Application Security Scan
       #   id: njsscan
       #   uses: ajinabraham/njsscan-action@master
@@ -71,7 +105,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
           target: 'https://www.zaproxy.org/'
-          cmd_options: '-a -J gl-dast-report.json'
+          # cmd_options: '-a -J gl-dast-report.json'
 
       - uses: actions/upload-artifact@v2
         if: always()
@@ -79,7 +113,7 @@ jobs:
           name: reports
           path: |
             reports/
-            xunit.xml
+            test-results.xml
             coverage/cobertura-coverage.xml
             app/coverage/cobertura-coverage.xml
             app/coverage/lcov-report/
