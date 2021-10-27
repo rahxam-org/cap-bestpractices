@@ -6,3 +6,5 @@ npm i
 pip install pre-commit
 pre-commit install
 pre-commit
+
+git config --global pull.rebase false
