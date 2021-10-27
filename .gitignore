@@ -65,3 +65,6 @@ npm-debug.log*
 
 test-results.xml
 gl-license-scan.json
+xunit.xml
+load-performance.json
+k6

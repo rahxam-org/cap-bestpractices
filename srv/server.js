@@ -19,6 +19,7 @@ cds.on('bootstrap', (app) => {
   })
 })
 
+// cds.once('served', require('./mashup'))
 // add more middleware after all CDS servies
 // cds.on('served', () => {
 // })
