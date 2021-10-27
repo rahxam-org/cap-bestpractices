@@ -38,7 +38,7 @@ jobs:
           ls
           mv default-env.json.bak default-env.json
 
-      - name: Install srv
+      - name: Install everything
         run: |
           npm i
           cd app
@@ -103,8 +103,8 @@ jobs:
         uses: zaproxy/action-full-scan@v0.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.zaproxy.org/'
+          docker_name: 'owasp/zap2docker-bare'
+          target: 'https://sc-schwielochsee.de/'
           # cmd_options: '-a -J gl-dast-report.json'
 
       - uses: actions/upload-artifact@v2
