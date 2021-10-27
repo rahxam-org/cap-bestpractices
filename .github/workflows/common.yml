@@ -150,14 +150,13 @@ jobs:
       - name: Check for secrets
         uses: zricethezav/gitleaks-action@master
 
-      # - name: ZAP Scan
-      #   uses: zaproxy/action-full-scan@v0.3.0
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     docker_name: 'owasp/zap2docker-stable'
-      #     target: 'https://www.zaproxy.org/'
-      #     rules_file_name: '.zap/rules.tsv'
-      #     cmd_options: '-a -J gl-dast-report.json'
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://www.zaproxy.org/'
+          cmd_options: '-a -J gl-dast-report.json'
 
       - name: nodejsscan scan
         id: njsscan
