@@ -5,7 +5,7 @@ name: test
 
 on:
   push:
-    branches-ignore: ['mainxx']
+    branches-ignore: ['mainxxx']
 
 jobs:
   test:
@@ -62,32 +62,18 @@ jobs:
       - name: srv API tests
         run: npm run test:with-mockserver
 
+      - name: Publish Test Report srv
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: 'test-results.xml'
+
       - name: UI tests
         run: |
           cd app/test
           npm run test:ci
 
-      - uses: 5monkeys/cobertura-action@master
-        name: srv coverage
-        with:
-          path: coverage/cobertura-coverage.xml
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 75
-
-      # - name: Publish Test Report srv
-      #   uses: mikepenz/action-junit-report@v2
-      #   if: always() # always run even if the previous step fails
-      #   with:
-      #     report_paths: 'junit.xml'
-
-      - uses: 5monkeys/cobertura-action@master
-        name: App coverage
-        with:
-          path: app/coverage/cobertura-coverage.xml
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 75
-
-      - name: Publish Test Report app
+      - name: Publish Test Report UI
         uses: mikepenz/action-junit-report@v2
         if: always() # always run even if the previous step fails
         with:
@@ -146,7 +132,7 @@ jobs:
           name: reports
           path: |
             reports/
-            xunit.xml
+            test-results.xml
             coverage/cobertura-coverage.xml
             app/coverage/cobertura-coverage.xml
             app/coverage/lcov-report/
@@ -155,37 +141,3 @@ jobs:
             njsscan.html
             load-performance.json
             gl-dast-report.json
-
-      - name: Configure committer
-        run: |
-          git config user.name "GitHub Actions Version Bot"
-          git config user.email "<>"
-      - name: Bump version
-        uses: qzb/standard-version-action@v1.0.1
-
-      # Replaced by dependabot
-      # - uses: oke-py/npm-audit-action@v1.8.2
-      #   name: backend audit
-      #   with:
-      #     audit_level: moderate
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     issue_labels: vulnerability
-      #     dedupe_issues: true
-      #     create_issues: false
-      #     production_flag: true
-
-      # - uses: oke-py/npm-audit-action@v1.8.2
-      #   name: app audit
-      #   with:
-      #     audit_level: moderate
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     issue_labels: vulnerability
-      #     dedupe_issues: true
-      #     create_issues: false
-      #     production_flag: true
-      #     working_directory: app
-
-      - uses: actions/upload-artifact@v2
-        if: failure()
-        with:
-          name: logs

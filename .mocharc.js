@@ -1,8 +1,9 @@
 // https://mochajs.org/#command-line-usage
 module.exports = {
-    reporter: "mocha-github-actions-reporter",
-    reporterOptions: {
-    },
+  reporter: 'mocha-junit-reporter',
+  reporterOptions: {
+      mochaFile: 'test-results.xml'
+  },
   allowUncaught: false,
   checkLeaks: true,
   color: true,
