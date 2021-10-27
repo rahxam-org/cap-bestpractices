@@ -1,7 +1,7 @@
 {
   "name": "bestpractices-ui",
   "description": "bestpractices-ui",
-  "license": "SEE LICENSE IN <filename>",
+  "license": "quadrio.de",
   "private": true,
   "devDependencies": {
     "@ui5/cli": "~2.14.0",

@@ -34,7 +34,7 @@ jobs:
         run: echo "BRANCH=${GITHUB_REF##*/}"  >> $GITHUB_ENV
 
       - name: Install srv
-        run:  |
+        run: |
           npm ci
           npm run lint
       - name: Install app
@@ -103,14 +103,68 @@ jobs:
         with:
           report_paths: 'app/test/reports/junit/*.xml'
 
+      - name: Check licenses
+        run: |
+          npx github:rahxam/license-checker --production --json --excludePrivatePackages --omitVersion --excludePackages='
+          ;@sap/approuter;@sap/e2e-trace;@sap/audit-logging;@sap/logging;@sap/xsenv;@sap/xssec;tweetnacl;
+          ' --onlyAllow='MIT;
+          ISC;
+          Apache-2.0;
+          BSD;
+          new BSD;
+          Simplified BSD;
+          CC-BY-4.0;
+          CC0-1.0;
+          CC-BY-3.0;
+          BSD-like;
+          (MIT AND Zlib);
+          MIT/X11;
+          Apache;
+          THE DERIVED BEER-WARE LICENSE;
+          BSD Zero Clause License;
+          Custom: https://tools.hana.ondemand.com/developer-license-3;
+          Custom: https://cap.cloud.sap;
+          Custom: https://www.sap.com/products/hana.html;'
+          cd app
+          npx github:rahxam/license-checker --production --json --excludePrivatePackages --omitVersion --excludePackages='
+          ;@sap/approuter;@sap/e2e-trace;@sap/audit-logging;@sap/logging;@sap/xsenv;@sap/xssec;tweetnacl;
+          ' --onlyAllow='MIT;
+          ISC;
+          Apache-2.0;
+          BSD;
+          new BSD;
+          Simplified BSD;
+          CC-BY-4.0;
+          CC0-1.0;
+          CC-BY-3.0;
+          BSD-like;
+          (MIT AND Zlib);
+          MIT/X11;
+          Apache;
+          THE DERIVED BEER-WARE LICENSE;
+          BSD Zero Clause License;
+          Custom: https://tools.hana.ondemand.com/developer-license-3;
+          Custom: https://cap.cloud.sap;
+          Custom: https://www.sap.com/products/hana.html;'
+
+      - name: Check for secrets
+        uses: zricethezav/gitleaks-action@master
+
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://www.zaproxy.org/'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a -J gl-dast-report.json'
+
       - name: nodejsscan scan
         id: njsscan
         uses: ajinabraham/njsscan-action@master
         with:
           args: '. --html --output njsscan.html || true'
-      - name: Check for secrets
-        uses: zricethezav/gitleaks-action@master
-        
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -123,29 +177,9 @@ jobs:
             app/coverage/lcov-report/
             app/test/reports/
             app/test/allure-report/
-            njsscan.sarif
-            
-      - name: Perform license checks
-        id: license-check
-        uses: ralexander-phi/license_approval@master
-        with:
-          package_manager: 'npm'
-
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.zaproxy.org/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a -J gl-dast-report.json'
-          
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: reports
-          path: |
+            njsscan.html
             gl-dast-report.json
+
       - name: Configure committer
         run: |
           git config user.name "GitHub Actions Version Bot"

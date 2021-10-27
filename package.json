@@ -1,5 +1,8 @@
 {
   "name": "bestpractices",
+  "licenses": [
+    "quadrio.de"
+  ],
   "version": "1.0.0",
   "description": "A monorepo with best practices for CAP.",
   "repository": "https://github.com/sap-samples/cloud-cap-samples.git",
@@ -114,7 +117,6 @@
       "describe"
     ]
   },
-  "license": "Quadrio License",
   "private": true,
   "cds": {
     "kibana_formatter": true,
