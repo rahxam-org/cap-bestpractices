@@ -150,14 +150,14 @@ jobs:
       - name: Check for secrets
         uses: zricethezav/gitleaks-action@master
 
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'https://www.zaproxy.org/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a -J gl-dast-report.json'
+      # - name: ZAP Scan
+      #   uses: zaproxy/action-full-scan@v0.3.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     docker_name: 'owasp/zap2docker-stable'
+      #     target: 'https://www.zaproxy.org/'
+      #     rules_file_name: '.zap/rules.tsv'
+      #     cmd_options: '-a -J gl-dast-report.json'
 
       - name: nodejsscan scan
         id: njsscan
@@ -165,19 +165,31 @@ jobs:
         with:
           args: '. --html --output njsscan.html || true'
 
+      - name: Install k6
+        run: |
+          curl https://github.com/loadimpact/k6/releases/download/v0.26.2/k6-v0.26.2-linux64.tar.gz -L | tar xvz --strip-components 1
+      - name: Start server and run load test tests
+        env:
+          LOAD_TEST_USER: admin
+          LOAD_TEST_PASSWORD: 1234
+          LOAD_TEST_URL: http://localhost:4004
+        run: |
+          npm run loadtest:with-server
+
       - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: reports
           path: |
             reports/
-            junit.xml
+            xunit.xml
             coverage/cobertura-coverage.xml
             app/coverage/cobertura-coverage.xml
             app/coverage/lcov-report/
             app/test/reports/
             app/test/allure-report/
             njsscan.html
+            load-performance.json
             gl-dast-report.json
 
       - name: Configure committer

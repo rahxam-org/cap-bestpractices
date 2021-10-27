@@ -21,6 +21,11 @@ RUN sudo gem install license_finder
 RUN cf install-plugin Targets -r CF-Community -f
 RUN cf install-plugin multiapps -r CF-Community -f
 
+RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+RUN echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+RUN sudo apt-get update
+RUN sudo apt-get install k6
+
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
