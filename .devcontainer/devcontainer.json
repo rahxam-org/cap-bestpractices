@@ -28,11 +28,26 @@
     },
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
+    "files.autoSave": "afterDelay",
+    "standard.autoFixOnSave": true,
     "editor.tabSize": 2,
     "editor.defaultFormatter": "numso.prettier-standard-vscode",
     "[xml]": {
       "editor.defaultFormatter": "DotJoshJohnson.xml"
     },
+    "gitlens.defaultDateFormat": "DD.MM.YYYY HH:mm",
+    "gitlens.defaultDateShortFormat": "DD.MM.YYYY",
+    "gitlens.defaultTimeFormat": "HH:mm",
+    "git.autofetch": true,
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+      {
+        "previewLimit": 50,
+        "driver": "SQLite",
+        "name": "Local SQLite",
+        "database": "sqlite.db"
+      }
+    ],
     "[cds]": {
       "editor.defaultFormatter": "SAPSE.vscode-cds"
     }

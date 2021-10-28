@@ -4,18 +4,10 @@
 name: Advanced-Tests
 
 on:
-  push:
-    branches-ignore: ['mainxx']
-
-jobs:
-  zap_scan:
-    runs-on: ubuntu-latest
-    name: Scan CourseTable with Zed Attack Proxy
-    steps:
-      - name: ZAP main site
-        uses: zaproxy/action-full-scan@v0.2.0
-        with:
-          target: 'https://www.coursetable.com'
+  pull_request:
+    branches:
+      - main
+      - dev
 
   test:
     runs-on: ubuntu-latest
@@ -91,11 +83,11 @@ jobs:
         with:
           report_paths: 'app/test/reports/junit/*.xml'
 
-      # - name: Static Application Security Scan
-      #   id: njsscan
-      #   uses: ajinabraham/njsscan-action@master
-      #   with:
-      #     args: '. --html --output njsscan.html || true'
+      - name: Static Application Security Scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@master
+        with:
+          args: '. --html --output njsscan.html || true'
 
       - name: Install k6
         run: |
@@ -108,13 +100,13 @@ jobs:
         run: |
           npm run loadtest:with-server
 
-      - name: Dynamic Application Security Scan
-        uses: zaproxy/action-full-scan@v0.3.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'https://sc-schwielochsee.de/'
-          # cmd_options: '-a -J gl-dast-report.json'
+      # - name: Dynamic Application Security Scan
+      #   uses: zaproxy/action-full-scan@v0.3.0
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     docker_name: 'owasp/zap2docker-stable'
+      #     target: 'https://sc-schwielochsee.de/'
+      # cmd_options: '-a -J gl-dast-report.json'
 
       - uses: actions/upload-artifact@v2
         if: always()

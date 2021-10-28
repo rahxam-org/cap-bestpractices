@@ -5,7 +5,7 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "jest",
+      "script": "test",
       "group": {
         "kind": "test",
         "isDefault": true
