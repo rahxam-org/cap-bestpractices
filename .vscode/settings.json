@@ -1,27 +1,12 @@
 {
-  "files.exclude": {
-    ".reuse/**": true,
-    "LICENSES/**": true
-  },
-  "debug.javascript.terminalOptions": {
-    "skipFiles": [
-      "<node_internals>/**",
-      "**/node_modules/**",
-      "**/cds/lib/lazy.js",
-      "**/cds/lib/req/cls.js",
-      "**/odata-v4/okra/**"
-    ]
-  },
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true,
-  "editor.tabSize": 2,
-  "editor.defaultFormatter": "numso.prettier-standard-vscode",
-  "[xml]": {
-    "editor.defaultFormatter": "DotJoshJohnson.xml"
-  },
-  "files.autoSave": "afterDelay",
-  "standard.autoFixOnSave": true,
-  "[cds]": {
-    "editor.defaultFormatter": "SAPSE.vscode-cds"
-  }
+  "sqltools.connections": [
+
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "test",
+      "database": "sqlite.db"
+    }
+  ],
+  "sqltools.useNodeRuntime": true
 }

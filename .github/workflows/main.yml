@@ -5,7 +5,7 @@ name: Main
 
 on:
   push:
-    branches-ignore: ['mainxx']
+    branches: ['main']
 
 jobs:
   versioning:
@@ -41,6 +41,18 @@ jobs:
       - name: Install srv
         run: |
           npm i
+          cd app
+          npm i
+
+      - name: Build MTA prod
+        run: |
+          npm run mta:prod
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: mta
+          path: mta_archives/
+          retention-days: 5
 
       - name: Configure committer
         run: |
