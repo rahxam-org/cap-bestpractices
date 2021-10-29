@@ -64,7 +64,9 @@ jobs:
         uses: qzb/standard-version-action@v1.0.1
 
       - name: Push changes
-        run: git push --tags
+        run: |
+          git push
+          git push --tags
         # uses: ad-m/github-push-action@v0.6.0
         # with:
         #   github_token: ${{ secrets.COMMIT_KEY }}
