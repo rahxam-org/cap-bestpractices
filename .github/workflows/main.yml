@@ -64,11 +64,12 @@ jobs:
         uses: qzb/standard-version-action@v1.0.1
 
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.COMMIT_KEY }}
-          branch: ${{ github.ref }}
-          tags: true
+        run: git push --tags
+        # uses: ad-m/github-push-action@v0.6.0
+        # with:
+        #   github_token: ${{ secrets.COMMIT_KEY }}
+        #   branch: ${{ github.ref }}
+        #   tags: true
 
       # Replaced by dependabot
       # - uses: oke-py/npm-audit-action@v1.8.2
