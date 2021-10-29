@@ -6,10 +6,12 @@ name: Main
 on:
   push:
     branches: ['main']
+    tags-ignore:
+      - 'v*'
 
 jobs:
   versioning:
-    if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/v') != true }}
     runs-on: ubuntu-latest
 
     steps:
