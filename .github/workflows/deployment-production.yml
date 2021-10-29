@@ -1,4 +1,4 @@
-name: Development Deployment
+name: Production Deployment
 
 on: workflow_dispatch
 
@@ -8,10 +8,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Declare some variables
+        id: vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Publish release
         uses: flownative/action-docker-publish-semver@master
         with:
-          tag_ref: ${{ github.ref }}
+          tag_ref: sha-${{ steps.vars.outputs.sha_short }}
           tag_latest: 'yes'
 
           source_image_name: docker.pkg.github.com/flownative/docker-base/base
