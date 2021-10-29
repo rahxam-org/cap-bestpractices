@@ -1,0 +1,25 @@
+name: Development Deployment
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish release
+        uses: flownative/action-docker-publish-semver@master
+        with:
+          tag_ref: ${{ github.ref }}
+          tag_latest: 'yes'
+
+          source_image_name: docker.pkg.github.com/flownative/docker-base/base
+          source_registry_username: ${{ github.repository_owner }}
+          source_registry_password: ${{ secrets.GITHUB_TOKEN }}
+          source_registry_endpoint: https://docker.pkg.github.com/v2/
+
+          target_image_name: flownative/base
+          target_registry_username: ${{ github.repository_owner }}
+          target_registry_password: ${{ secrets.GITHUB_TOKEN }}
+          target_registry_endpoint: https://docker.pkg.github.com/v2/

@@ -24,7 +24,7 @@ RUN echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list
 RUN sudo apt-get -y update
 
 # Install chrome for UI testen, k6 for load testing and the cloud foundry cli for deployment
-RUN sudo apt-get install -y install google-chrome-stable cf8-cli k6
+RUN sudo apt-get install -y  google-chrome-stable cf8-cli k6
 
 # Install Cloud Foundry CLI Plugins
 RUN cf install-plugin Targets -r CF-Community -f
