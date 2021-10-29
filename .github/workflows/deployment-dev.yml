@@ -8,15 +8,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Docker meta
+      - name: Create Docker taggs
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/QuadriO/kiss-cloud-navigator
+          flavor: |
+            latest=false
+            prefix=
+            suffix=
+          images: ghcr.io/rahxam-org/cap-bestpractices
           tags: |
-            type=semver,pattern={{version}}
+            type=raw,dev
+            type=sha
       - name: Login to DockerHub
-        if: github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
@@ -28,3 +32,14 @@ jobs:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Declare commit hash variable
+        id: vars
+        shell: bash
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Deploy docker container webhook
+        uses: joelwmale/webhook-action@master
+        env:
+          WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL  }}
+          data: "{ 'environment': 'development', 'version': 'sha-${{ steps.vars.outputs.sha_short }}', 'port': '1'}"

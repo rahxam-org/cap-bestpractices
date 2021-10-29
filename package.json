@@ -73,7 +73,7 @@
     "start:test": "cds run --profile test",
     "start:dev": "cds run --with-mocks",
     "start:sqlite": "npm run data:test && cds run --profile test",
-    "start:container": "npx concurrently --kill-others \"npm run start:test\" \"cd app && npm run start\"",
+    "start:container": "npx concurrently --kill-others \"npm run ${START_SCRIPT:-start:test}\" \"cd app && npm run start\"",
     "ssh": "cf ssh bestpractices-srv -N -T -L 20003:connectivityproxy.internal.cf.eu10.hana.ondemand.com:20003",
     "cleanup": "rm -rf node_modules && rm -rf */node_modules && rm -rf */*/node_modules",
     "build": "cds build/all --clean",

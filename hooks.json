@@ -1,0 +1,35 @@
+[
+  {
+    "id": "redeployment",
+    "execute-command": "/home/rahxam/redeployment.sh",
+    "command-working-directory": "/home/rahxam",
+    "pass-arguments-to-command": [
+      {
+        "source": "payload",
+        "name": "port"
+      },
+      {
+        "source": "payload",
+        "name": "version"
+      },
+      {
+        "source": "payload",
+        "name": "environment"
+      }
+    ],
+    "trigger-rule": {
+      "or": [
+        {
+          "match": {
+            "type": "value",
+            "value": "xxx",
+            "parameter": {
+              "source": "url",
+              "name": "secret"
+            }
+          }
+        }
+      ]
+    }
+  }
+]
