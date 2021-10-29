@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.28 (2021-10-29)
+
+
+### CI
+
+* **deployment:** ghcr.io ([eb50a22](https://github.com/sap-samples/cloud-cap-samples/commit/eb50a2205f3c8617c2b752edd893b56627438299))
+
 ### 1.0.27 (2021-10-29)
 
 
