@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.12 (2021-10-29)
+
+
+### CI
+
+* **deployment-production:** change docker image name ([902cd2f](https://github.com/sap-samples/cloud-cap-samples/commit/902cd2f7e10f94ec9d07022dc676653b0f2a150c))
+
 ### 1.0.11 (2021-10-29)
 
 ### 1.0.10 (2021-10-29)
