@@ -16,6 +16,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
+          flavor: |
+            latest=false
+            prefix=
+            suffix=
           images: ghcr.io/rahxam-org/cap-bestpractices
           tags: |
             type=semver,pattern={{version}}
