@@ -1,5 +1,5 @@
 module.exports = {
-  releaseCommitMessageFormat: "chore(release): {{currentTag}} [ci skip]",
+  releaseCommitMessageFormat: "chore(release): {{currentTag}}",
   bumpFiles: [
     {
       filename: "mta.yaml",
