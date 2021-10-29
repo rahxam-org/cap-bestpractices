@@ -20,12 +20,12 @@ jobs:
           tag_ref: sha-${{ steps.vars.outputs.sha_short }}
           tag_latest: 'yes'
 
-          source_image_name: docker.pkg.github.com/flownative/docker-base/base
+          source_image_name: ghcr.io/rahxam-org/cap-bestpractices
           source_registry_username: ${{ github.repository_owner }}
           source_registry_password: ${{ secrets.GITHUB_TOKEN }}
           source_registry_endpoint: https://docker.pkg.github.com/v2/
 
-          target_image_name: flownative/base
+          target_image_name: ghcr.io/rahxam-org/cap-bestpractices
           target_registry_username: ${{ github.repository_owner }}
           target_registry_password: ${{ secrets.GITHUB_TOKEN }}
           target_registry_endpoint: https://docker.pkg.github.com/v2/
