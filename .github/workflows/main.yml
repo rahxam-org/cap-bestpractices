@@ -40,7 +40,6 @@ jobs:
 
       - name: create default-env.json
         run: |
-          ls
           mv default-env.json.bak default-env.json
 
       - name: Install srv
