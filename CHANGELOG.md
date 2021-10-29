@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.0.26 (2021-10-29)
+
+
+### Others
+
+* **release:** 1.0.25 ([138b304](https://github.com/sap-samples/cloud-cap-samples/commit/138b3043342d4b34a2510e026323f88e341b4b06))
+
 ### 1.0.25 (2021-10-29)
 
 ### 1.0.24 (2021-10-29)
