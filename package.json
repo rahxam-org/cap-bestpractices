@@ -3,7 +3,7 @@
   "licenses": [
     "quadrio.de"
   ],
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A monorepo with best practices for CAP.",
   "repository": "https://github.com/sap-samples/cloud-cap-samples.git",
   "author": "maximilian.hartig@quadrio.de",
