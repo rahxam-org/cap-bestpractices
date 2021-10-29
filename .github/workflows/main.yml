@@ -65,16 +65,16 @@ jobs:
           git config user.email "<>"
       - name: Bump version
         uses: qzb/standard-version-action@v1.0.1
+      - name: Push tags
+        run: |
+          git push --tags
+
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           tags: false
-
-      - name: Push tags
-        run: |
-          git push --tags
       # Replaced by dependabot
       # - uses: oke-py/npm-audit-action@v1.8.2
       #   name: backend audit
