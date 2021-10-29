@@ -251,24 +251,24 @@ Follow this guideline to trouble-shoot failing ui tests.
 
 ### Deploy from development environment to Cloud Foundry
 
-1.  Create file `mta_local.mtaext` with content (only one of bestpractices-dev/bestpractices-test/bestpractices):
+1. reate file `mta_local.mtaext` with content (only one of bestpractices-dev/bestpractices-test/bestpractices):
 
-    ```yaml
-    _schema-version: '3.1'
-    ID: bestpractices-conf
-    extends: bestpractices
-    parameters:
-      MTA_ENV: bestpractices-dev/bestpractices-test/bestpractices
-    ```
+   ```yaml
+   _schema-version: '3.1'
+   ID: bestpractices-conf
+   extends: bestpractices
+   parameters:
+     MTA_ENV: bestpractices-dev/bestpractices-test/bestpractices
+   ```
 
-2.  Set cloud foundry target to correct space f.e. `cf target -o xxxx -s bestpractices`
-3.  Build and deploy WITHOUT test data: `npm run build-deploy:prod` or WITH test data: `npm run build-deploy:dev`
+2. Set cloud foundry target to correct space f.e. `cf target -o xxxx -s bestpractices`
+3. Build and deploy WITHOUT test data: `npm run build-deploy:prod` or WITH test data: `npm run build-deploy:dev`
 
 ### DB Auto Undeployment
 
-1.  Set cloud foundry target to correct space f.e. `cf target -o xxxx -s cap-bestpractices`
-2.  Build and deploy `npm run deploy:hana`
-3.  Add flag `--auto-undeploy` to start script in `gen/db/package.json` once it is generated and before deployment start
+1. Set cloud foundry target to correct space f.e. `cf target -o xxxx -s cap-bestpractices`
+2. Build and deploy `npm run deploy:hana`
+3. Add flag `--auto-undeploy` to start script in `gen/db/package.json` once it is generated and before deployment start
 
 ## Code Style Guide
 
@@ -306,25 +306,7 @@ The [standardJS](https://standardjs.com/) Code Style Guide is used
 
 ### Naming Conventions UI5 Applications
 
-The SAP UI5 [Coding Guidelines](https://sapui5.hana.ondemand.com/1.36.6/docs/guide/eded636b85584cd586b1fe231d2b5dac.html) are used
-
-- UI5 applications variables will use Hungarian notation
-
-  | oDomRef     | object             |
-  | ----------- | ------------------ |
-  | \$DomRef    | jQuery object      |
-  | iCount      | int                |
-  | mParameters | map / assoc. array |
-  | aEntries    | array              |
-  | dToday      | date               |
-  | fDecimal    | float              |
-  | bEnabled    | boolean            |
-  | rPattern    | RegExp             |
-  | fnFunction  | function           |
-  | vVariant    | variant types      |
-
-- Use CamelCase for class names, starting with an uppercase letter
-- HTML element IDs starting with sap-ui- are reserved for SAPUI5
+- HTML element IDs starting with `sap-ui- are` reserved for SAPUI5
 - DOM attribute names starting with `data-sap-ui-`
 - URL parameter names starting with `sap-` and `sap-ui-` are reserved for SAPUI5.
 

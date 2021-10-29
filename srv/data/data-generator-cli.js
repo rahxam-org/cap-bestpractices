@@ -1,4 +1,4 @@
 // module.exports = require('./data')
 
-const DataGenerator = require('./DataGenerator')
+const DataGenerator = require('./data-generator')
 module.exports = new DataGenerator().writeCSV()

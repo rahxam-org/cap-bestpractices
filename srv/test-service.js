@@ -1,10 +1,10 @@
 let dataGenerator = null
-module.exports = cds.service.impl(srv => {
+module.exports = cds.service.impl((srv) => {
   srv.on('reset', async () => {
     // lazy loading
     cds.env.features.assert_integrity = false
     if (!dataGenerator) {
-      const DataGenerator = require('./data/DataGenerator')
+      const DataGenerator = require('./data/data-generator')
 
       dataGenerator = new DataGenerator()
     }

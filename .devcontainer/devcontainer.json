@@ -38,6 +38,7 @@
     "gitlens.defaultDateFormat": "DD.MM.YYYY HH:mm",
     "gitlens.defaultDateShortFormat": "DD.MM.YYYY",
     "gitlens.defaultTimeFormat": "HH:mm",
+    "gitlens.currentLine.enabled": false,
     "git.autofetch": true,
     "sqltools.useNodeRuntime": true,
     "sqltools.connections": [
@@ -76,11 +77,47 @@
     "mtxr.sqltools-driver-pg",
     "mtxr.sqltools-driver-sqlite",
     "jgclark.vscode-todo-highlight",
-    "numso.prettier-standard-vscode"
+    "numso.prettier-standard-vscode",
+    "naumovs.color-highlight",
+    "CoenraadS.bracket-pair-colorizer-2",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "aaron-bond.better-comments",
+    "pranaygp.vscode-css-peek",
+    "formulahendry.auto-rename-tag",
+    "ChakrounAnas.turbo-console-log",
+    "chrmarti.regex",
+    "ionutvmi.path-autocomplete",
+    "meganrogge.template-string-converter"
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [4004, 4005, 5000, 8080],
+
+  "portsAttributes": {
+    "4004": {
+      "label": "CAP Srv",
+      "onAutoForward": "notify"
+    },
+    "4005": {
+      "label": "Mockserver",
+      "onAutoForward": "notify"
+    },
+    "5000": {
+      "label": "Approuter",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "UI5",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "remoteEnv": {
+    "LOAD_TEST_USER": "admin",
+    "LOAD_TEST_PASSWORD": "1234",
+    "LOAD_TEST_URL": "https://localhost:4004"
+  },
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
