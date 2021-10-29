@@ -1,6 +1,6 @@
 _schema-version: "3.1"
 ID: bestpractices
-version: 1.0.10
+version: 1.0.11
 description: bestpractices Application
 parameters:
   enable-parallel-deployments: true
