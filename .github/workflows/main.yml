@@ -46,15 +46,15 @@ jobs:
           cd app
           npm i
 
-      - name: Build MTA prod
-        run: |
-          npm run mta:prod
+      # - name: Build MTA prod
+      #   run: |
+      #     npm run mta:prod
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: mta
-          path: mta_archives/
-          retention-days: 5
+      # - uses: actions/upload-artifact@v2
+      #   with:
+      #     name: mta
+      #     path: mta_archives/
+      #     retention-days: 5
 
       - name: Configure committer
         run: |
@@ -66,9 +66,18 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.COMMIT_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
           tags: true
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/rahxam-org/cap-bestpractices
+          tags: |
+            type=semver,pattern={{version}}
+            type=sha
       # Replaced by dependabot
       # - uses: oke-py/npm-audit-action@v1.8.2
       #   name: backend audit
