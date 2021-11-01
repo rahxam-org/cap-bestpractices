@@ -22,7 +22,7 @@
         {
           "match": {
             "type": "value",
-            "value": "xxx",
+            "value": "1232908sadfjklasdfjkl32908234jkl",
             "parameter": {
               "source": "url",
               "name": "secret"
