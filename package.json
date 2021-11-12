@@ -11,7 +11,7 @@
     "@sap/cds": "^5.5.5",
     "@sap/hana-client": "^2.10.15",
     "@sap/xsenv": "^3.1.1",
-    "@sap/xssec": "^3.2.8",
+    "@sap/xssec": "^3.2.10",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
